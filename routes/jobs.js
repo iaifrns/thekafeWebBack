@@ -8,4 +8,6 @@ jobRoute.get("/",getAllJobs)
 jobRoute.get("/:id",getOneJob)
 jobRoute.post("/",saveJob)
 jobRoute.delete("/:id",deleteJob)
-jobRoute.put("/:id",updateJob)
+jobRoute.patch("/:id",updateJob)
+
+export {jobRoute}

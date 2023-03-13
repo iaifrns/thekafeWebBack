@@ -9,7 +9,7 @@ import {categoryRoute} from './category.js'
 
 export const ROUTES = {
     users: userRoute,
-    jobs: jobRoute,
+    job: jobRoute,
     employee:employeeRoute,
     review:reviewRoute,
     company:companyRoute,

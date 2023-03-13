@@ -38,6 +38,13 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/users",ROUTES.users)
+app.use("/jobs",ROUTES.job)
+app.use("/category",ROUTES.category)
+app.use("/company",ROUTES.company)
+app.use("/employee",ROUTES.employee)
+app.use("/notification",ROUTES.notification)
+app.use("/review",ROUTES.review)
+app.use("/role",ROUTES.role)
 
 const port = 5000;
 

@@ -1,10 +1,8 @@
-
 import { db } from './index.js'
 
-const tableName = 'users'
+const tableName = 'Jobs'
 
-
-export const getAllUsers = async (req,res)=>{
+export const getAllJobs = async (req,res)=>{
 
     try{
     const { ok, data, message} = await db.findAll(tableName,[],0,'asc',['id'])
@@ -17,7 +15,7 @@ export const getAllUsers = async (req,res)=>{
     }
 }
 
-export const getOneUser = async (req,res)=>{
+export const getOneJob = async (req,res)=>{
     try{
         const { ok,data,message } = await db.find(tableName,['id'],[req.params.id],'AND')
         if(ok)
@@ -34,7 +32,7 @@ export const getOneUser = async (req,res)=>{
     }
 }
 
-export const saveUser = async (req,res)=>{
+export const saveJob = async (req,res)=>{
     let columns = []
     let values = []
 
@@ -58,16 +56,16 @@ export const saveUser = async (req,res)=>{
     }
 }
 
-export const updateUser = async (req,res)=>{
-    let user = req.body
+export const updateJob = async (req,res)=>{
+    let Job = req.body
 
-    if(!user.hasOwnProperty('id') && req.params.id)
-        user.id = req.params.id 
+    if(!Job.hasOwnProperty('id') && req.params.id)
+        Job.id = req.params.id 
 
     let references={id: req.params.id}
 
     try{
-        const { ok,data,message } = await db.update(tableName,user,references,"AND")
+        const { ok,data,message } = await db.update(tableName,Job,references,"AND")
         if(ok)
             res.status(200).json({data,message})
         else
@@ -82,7 +80,7 @@ export const updateUser = async (req,res)=>{
     }
 }
 
-export const deleteUser = async (req,res)=>{
+export const deleteJob = async (req,res)=>{
     let field = ''
     let value = ''
 

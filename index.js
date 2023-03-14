@@ -5,6 +5,7 @@ import { ROUTES } from './routes/index.js';
 import { createDatabase, useDB } from './db_connection.js';
 import { createAllTables } from './helpers/models.js';
 
+import authRoutes from "./routes/auth.js";
 const app = express()
 app.use(cors("*"))
 
@@ -45,7 +46,7 @@ app.use("/employee",ROUTES.employee)
 app.use("/notification",ROUTES.notification)
 app.use("/review",ROUTES.review)
 app.use("/role",ROUTES.role)
-
+app.use("/auth", authRoutes);
 const port = 5000;
 
 

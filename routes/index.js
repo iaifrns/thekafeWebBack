@@ -7,6 +7,7 @@ import {roleRoute} from './role.js'
 import {notificationRoute} from './notification.js'
 import {categoryRoute} from './category.js'
 
+
 export const ROUTES = {
     users: userRoute,
     job: jobRoute,
@@ -15,6 +16,7 @@ export const ROUTES = {
     company:companyRoute,
     role:roleRoute,
     notification:notificationRoute,
-    category:categoryRoute
+    category:categoryRoute,
+    
     
 }

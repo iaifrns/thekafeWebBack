@@ -1,5 +1,8 @@
 import mysql from 'mysql2/promise'
 import { credentials }  from './constants.js'
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
 
 const db = await mysql.createConnection({
     host: credentials.host,
@@ -526,6 +529,8 @@ function getPrimaryKey(res){
 
         return pk;
 }
+
+
 
 // sample test for all the method
 

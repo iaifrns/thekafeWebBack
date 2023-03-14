@@ -16,4 +16,5 @@ export const ROUTES = {
     role:roleRoute,
     notification:notificationRoute,
     category:categoryRoute
+    
 }

@@ -27,6 +27,10 @@ export const register = async (req, res) => {
     } else {
       return res.status(500).json({ message: 'Sorry an error occured try again' })
     }
+    const saltRounds = 10
+    const salt = await bcrypt.genSalt(saltRounds)
+    const hash = await bcrypt.hash(req.body[0].userPassword, salt)
+    req.body[0].userPassword = hash
     columns = Object.keys(req.body[0])
     values = (() => {
       let arr = []; req.body.forEach(element => {
@@ -36,10 +40,7 @@ export const register = async (req, res) => {
     })()
   }
   try {
-    const saltRounds = 10
-    const salt = await bcrypt.genSalt(saltRounds)
-    const hash = await bcrypt.hash(req.body[0].userPassword, salt)
-    req.body[0].userPassword = hash
+   
     const { ok, data, message } = await db.insert("users", columns, values)
     if (ok)
       res.status(201).json({ data: req.body, message })
@@ -60,9 +61,12 @@ export const login = async (req, res) => {
   const { ok, data, message } = await db.find("users", fields, values)
   if (!ok)
     return res.status(404).json("Wrong username or password!");
+    console.log(data[0].userPassword)
   const isPasswordValid = await bcrypt.compare(req.body.userPassword, data[0].userPassword)
   if (!isPasswordValid)
     return res.status(400).json("Wrong username or password!");
+    
+    
 
   const token = jwt.sign({ id: data[0].id }, "jwtkey");
   const { userPassword, ...other } = data[0];

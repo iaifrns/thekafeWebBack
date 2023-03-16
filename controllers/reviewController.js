@@ -1,10 +1,8 @@
-
 import { db } from './index.js'
 
-const tableName = 'users'
+const tableName = 'Reviews'
 
-
-export const getAllUsers = async (req,res)=>{
+export const getAllReviews = async (req,res)=>{
 
     try{
     const { ok, data, message} = await db.findAll(tableName,[],0,'asc',['id'])
@@ -17,7 +15,7 @@ export const getAllUsers = async (req,res)=>{
     }
 }
 
-export const getOneUser = async (req,res)=>{
+export const getOneReview = async (req,res)=>{
     try{
         const { ok,data,message } = await db.find(tableName,['id'],[req.params.id],'AND')
         if(ok)
@@ -34,7 +32,7 @@ export const getOneUser = async (req,res)=>{
     }
 }
 
-export const saveUser = async (req,res)=>{
+export const saveReview = async (req,res)=>{
     let columns = []
     let values = []
 
@@ -58,16 +56,16 @@ export const saveUser = async (req,res)=>{
     }
 }
 
-export const updateUser = async (req,res)=>{
-    let user = req.body
+export const updateReview = async (req,res)=>{
+    let Review = req.body
 
-    if(!user.hasOwnProperty('id') && req.params.id)
-        user.id = req.params.id 
+    if(!Review.hasOwnProperty('id') && req.params.id)
+        Review.id = req.params.id 
 
     let references={id: req.params.id}
 
     try{
-        const { ok,data,message } = await db.update(tableName,user,references,"AND")
+        const { ok,data,message } = await db.update(tableName,Review,references,"AND")
         if(ok)
             res.status(200).json({data,message})
         else
@@ -82,16 +80,13 @@ export const updateUser = async (req,res)=>{
     }
 }
 
-export const deleteUser = async (req,res)=>{
+export const deleteReview = async (req,res)=>{
     let field = ''
     let value = ''
 
     if(req.params.id){
         value = req.params.id
         field = 'id'
-    }else if(req.query.email){
-        value = req.query.email
-        field = 'email'
     }
     try{
         const { ok,data,message } = await db.deleteOne(tableName,field,value)

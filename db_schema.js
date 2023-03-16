@@ -8,6 +8,10 @@ export const users = [
         type: 'varchar(255)'
     },
     {
+        name:'userEmail',
+        type: 'varchar(255)'
+    },
+    {
         name:'user_image',
         type: 'varchar(255)'
     },

@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs'
 import { ROUTES } from './routes/index.js';
 import { createDatabase, useDB } from './db_connection.js';
 import { createAllTables } from './helpers/models.js';
 import dotenv from 'dotenv'
 dotenv.config()
 
+import authRoutes from "./routes/auth.js";
 const app = express()
 app.use(cors("*"))
 
@@ -40,7 +40,14 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/users",ROUTES.users)
-
+app.use("/jobs",ROUTES.job)
+app.use("/category",ROUTES.category)
+app.use("/company",ROUTES.company)
+app.use("/employee",ROUTES.employee)
+app.use("/notification",ROUTES.notification)
+app.use("/review",ROUTES.review)
+app.use("/role",ROUTES.role)
+app.use("/auth", authRoutes);
 const port = process.env.port || 5000;
 
 

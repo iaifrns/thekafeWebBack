@@ -89,7 +89,7 @@ export const employees = [
     },
     {
         name:'salary',
-        type: 'varchar(255)'
+        type: 'int'
     }
 ]
 
@@ -103,11 +103,11 @@ export const reviews = [
 export const role = [
     {
         name:'role_name',
-        type: 'int'
+        type: 'varchar(255)'
     },
     {
         name:'description',
-        type: 'int'
+        type: 'varchar(255)'
     }
 ]
 

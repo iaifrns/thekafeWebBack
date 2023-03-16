@@ -1,6 +1,6 @@
 import { db } from './index.js'
 
-const tableName = 'Category'
+const tableName = 'categories'
 
 export const getAllCategorys = async (req,res)=>{
 

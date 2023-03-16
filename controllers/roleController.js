@@ -1,6 +1,6 @@
 import { db } from './index.js'
 
-const tableName = 'Roles'
+const tableName = 'role'
 
 export const getAllRoles = async (req,res)=>{
 

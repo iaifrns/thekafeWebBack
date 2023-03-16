@@ -1,6 +1,6 @@
 import { db } from './index.js'
 
-const tableName = 'Notifications'
+const tableName = 'notifications'
 
 export const getAllNotifications = async (req,res)=>{
 

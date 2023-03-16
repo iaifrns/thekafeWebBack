@@ -4,6 +4,8 @@ import fs from 'fs'
 import { ROUTES } from './routes/index.js';
 import { createDatabase, useDB } from './db_connection.js';
 import { createAllTables } from './helpers/models.js';
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 app.use(cors("*"))
@@ -39,7 +41,7 @@ app.get('/',(req,res)=>{
 
 app.use("/users",ROUTES.users)
 
-const port = 5000;
+const port = process.env.port || 5000;
 
 
 app.listen(port,()=>{

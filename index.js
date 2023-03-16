@@ -3,14 +3,18 @@ import cors from 'cors';
 import { ROUTES } from './routes/index.js';
 import { createDatabase, useDB } from './db_connection.js';
 import { createAllTables } from './helpers/models.js';
+import cookieSession from 'cookie-session';
+import passport from 'passport';
 import dotenv from 'dotenv'
-dotenv.config()
-
 import authRoutes from "./routes/auth.js";
-const app = express()
-app.use(cors("*"))
+import './passport.js'
 
+
+
+const app = express()
 const db_name = "job_portal"
+
+dotenv.config()
 const {ok, message} = await createDatabase(db_name)
 
 if (ok) {
@@ -30,6 +34,33 @@ if (ok) {
 }else{
     console.log(message)
 }
+
+//implemeing cookieSession to keep login sessions
+app.use(cookieSession({name:'session', keys:['daniel'], maxAge: 24*60*60*100  }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(function(request, response, next) {
+    if (request.session && !request.session.regenerate) {
+        request.session.regenerate = (cb) => {
+            cb()
+        }
+    }
+    if (request.session && !request.session.save) {
+        request.session.save = (cb) => {
+            cb()
+        }
+    }
+    next()
+})
+
+app.use(cors({
+    origin:'http://localhost:3000',
+    methods:"GET,POST,PUT,DELETE,PATCH",
+    credentials: true
+}))
+
+
 
 // Do this to be able to upload high quality images and support large json body
 app.use(express.json({limit: '50mb'}));

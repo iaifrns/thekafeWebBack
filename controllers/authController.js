@@ -80,7 +80,6 @@ export const login = async (req, res) => {
     return res.status(404).json("Incorrect email or password !");
 
   //implementing jwt and adding logged user object as payload
-  console.log(process.env.JWT_TOKEN_KEY)
   const token = jwt.sign({ user: data[0] },process.env.JWT_TOKEN_KEY,
     {
       expiresIn: "3h",
